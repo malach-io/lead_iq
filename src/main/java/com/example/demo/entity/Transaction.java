@@ -14,10 +14,10 @@ public class Transaction {
   private static long transactionCounter = 0;
   @JsonIgnore
   @Setter(AccessLevel.NONE)
-  private final long transaction_id = transactionCounter + 1;
-  double amount;
-  String type;
-  long parent_id;
+  private final long transaction_id = transactionCounter;
+  private double amount;
+  private String type;
+  private long parent_id;
   
   public Transaction() {
     transactionCounter++;

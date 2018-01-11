@@ -11,14 +11,10 @@ import com.example.demo.entity.Transaction;
 @Service
 public class TransactionService {
   
-  private List<Transaction> transactionList;
+  private ArrayList<Transaction> transactionList;
   
   public TransactionService() {
     this.transactionList = new ArrayList<Transaction>();
-  }
-
-  public String greeting() {
-    return "Good Job, Greeter";
   }
   
   public Transaction createTransaction(Transaction transaction) {
@@ -27,18 +23,18 @@ public class TransactionService {
   }
   
   public Object updateTransactionById(Transaction transaction, Long transaction_id) {
-    Transaction trans = getTransactionById(transaction.getTransaction_id());
+    Transaction trans = getTransactionById(transaction_id);
     trans.setAmount(transaction.getAmount());
     trans.setParent_id(transaction.getParent_id());
     trans.setType(transaction.getType());
-    return getTransactionById(transaction.getTransaction_id());
+    return getTransactionById(transaction_id);
   }
   
   public Transaction getTransactionById(Long transaction_id) {
-    return transactionList.stream()
-        .filter(x -> x.getTransaction_id() == transaction_id)
-        .findFirst()
-        .orElse(null);
+    if (transactionList.size() > transaction_id) {
+      return transactionList.get(transaction_id.intValue());
+    }
+    return null;
     /**
     Returns: { "amount":double,"type":string,"parent_id":long }
      */
